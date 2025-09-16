@@ -1,0 +1,26 @@
+{
+    "name": "tenis/tic-tac-toe",
+    "description": "TicTacToe",
+    "type": "project",
+    "bin": [
+        "bin/tic-tac-toe"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Tenis\\TicTacToe\\": "src/"
+        },
+        "files": [
+        "src/Controller.php",
+        "src/View.php"
+    ]
+    },
+    "authors": [
+        {
+            "name": "tenishevR",
+            "email": "tenishev.brrrrrain@gmail.com"
+        }
+    ],
+    "require": {
+        "wp-cli/php-cli-tools": "^0.12.6"
+    }
+}
