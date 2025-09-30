@@ -1,0 +1,17 @@
+{
+    "name": "tenis/tic-tac-toe",
+    "description": "TicTacToe console game (Task03)",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Tenis\\TicTacToe\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/tic-tac-toe"
+    ],
+    "require": {
+        "php": ">=8.0",
+        "wp-cli/php-cli-tools": "^0.12.6"
+    }
+}
