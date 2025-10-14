@@ -1,8 +1,11 @@
 <?php
+
 namespace Tenis\TicTacToe;
 
-class HumanPlayer extends Player {
-    public function makeMove(Board $board): array {
+class HumanPlayer extends Player
+{
+    public function makeMove(Board $board): array
+    {
         while (true) {
             echo "Your move ({$this->symbol}), enter 'row col': ";
             $input = trim(fgets(STDIN));

@@ -1,14 +1,18 @@
 <?php
+
 namespace Tenis\TicTacToe;
 
-abstract class Player {
+abstract class Player
+{
     protected string $symbol;
 
-    public function __construct(string $symbol) {
+    public function __construct(string $symbol)
+    {
         $this->symbol = $symbol;
     }
 
-    public function getSymbol(): string {
+    public function getSymbol(): string
+    {
         return $this->symbol;
     }
 

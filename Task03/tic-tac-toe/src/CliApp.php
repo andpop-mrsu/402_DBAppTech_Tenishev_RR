@@ -1,9 +1,12 @@
 <?php
+
 namespace Tenis\TicTacToe;
 
-class CliApp {
-    public function run(array $argv): void {
-        $options = getopt('hnlr:', ['help','new','list','replay:']);
+class CliApp
+{
+    public function run(array $argv): void
+    {
+        $options = getopt('hnlr:', ['help', 'new', 'list', 'replay:']);
 
         if (isset($options['h']) || isset($options['help'])) {
             $this->showHelp();
@@ -23,20 +26,22 @@ class CliApp {
         $this->startNewGame();
     }
 
-    private function showHelp(): void {
+    private function showHelp(): void
+    {
         echo "Usage: tic-tac-toe [--new|-n] [--list|-l] [--replay ID|-r ID] [--help|-h]\n";
         echo "Board size: 3–10\n";
         echo "Moves: row col (e.g. '1 2')\n";
     }
 
-    private function startNewGame(): void {
+    private function startNewGame(): void
+    {
         $size = 0;
         while ($size < 3 || $size > 10) {
             echo "Enter board size (3–10): ";
             $size = (int)trim(fgets(STDIN));
         }
 
-        $humanSymbol = random_int(0,1) ? 'X' : 'O';
+        $humanSymbol = random_int(0, 1) ? 'X' : 'O';
         $computerSymbol = $humanSymbol === 'X' ? 'O' : 'X';
 
         $human = new HumanPlayer($humanSymbol);
