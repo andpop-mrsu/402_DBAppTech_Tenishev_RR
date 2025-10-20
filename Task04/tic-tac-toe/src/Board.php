@@ -54,5 +54,6 @@ class Board
             echo str_pad((string)($i + 1), 2, ' ', STR_PAD_LEFT) . ' ';
             echo implode(' ', $row) . PHP_EOL;
         }
+        echo PHP_EOL;
     }
 }

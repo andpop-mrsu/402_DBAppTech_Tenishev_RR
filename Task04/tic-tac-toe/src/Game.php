@@ -17,18 +17,31 @@ class Game
         $this->playerO = $playerO;
     }
 
-    public function play(): void
+    public function play(bool $returnMoves = false): array
     {
+        $moves = [];
+        $moveNumber = 1;
+
         while (!$this->isOver()) {
             $this->board->render();
+
             $player = $this->current === 'X' ? $this->playerX : $this->playerO;
             [$row, $col] = $player->makeMove($this->board);
+
             $this->board->setCell($row, $col, $player->getSymbol());
+
+            $moves[] = [
+                'move_number' => $moveNumber++,
+                'player' => $player->getSymbol(),
+                'row' => $row,
+                'col' => $col
+            ];
 
             if ($this->checkWin($row, $col, $player->getSymbol())) {
                 $this->winner = $player->getSymbol();
                 break;
             }
+
             if ($this->board->isFull()) {
                 break;
             }
@@ -37,11 +50,14 @@ class Game
         }
 
         $this->board->render();
-        if ($this->winner) {
-            echo "Winner: {$this->winner}\n";
-        } else {
-            echo "It's a draw!\n";
-        }
+        echo $this->winner ? "Winner: {$this->winner}\n" : "It's a draw!\n";
+
+        return $returnMoves ? $moves : [];
+    }
+
+    public function getWinner(): ?string
+    {
+        return $this->winner;
     }
 
     private function isOver(): bool
@@ -54,18 +70,15 @@ class Game
         $size = $this->board->getSize();
         $cells = $this->board->getCells();
 
-        // row
         if (count(array_unique($cells[$row])) === 1) {
             return true;
         }
 
-        // col
         $colVals = array_column($cells, $col);
         if (count(array_unique($colVals)) === 1) {
             return true;
         }
 
-        // diag main
         if ($row === $col) {
             $diag = [];
             for ($i = 0; $i < $size; $i++) {
@@ -76,7 +89,6 @@ class Game
             }
         }
 
-        // diag anti
         if ($row + $col === $size - 1) {
             $diag = [];
             for ($i = 0; $i < $size; $i++) {
